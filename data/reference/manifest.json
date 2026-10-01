@@ -1,0 +1,70 @@
+{
+  "selected_high_nonstationarity_events.csv": {
+    "sha256": "ec4fe000adce462c03bde94ab90c4bd696c3ad82dd1da4a05cc0670d9b3816e0",
+    "source": "outputs/tables/selected_high_nonstationarity_events.csv"
+  },
+  "selected_high_nonstationarity_realization.csv": {
+    "sha256": "b5de4a26d525c99614858d1ace522abed33b43361919a7c01644b1ae53af8e71",
+    "source": "outputs/tables/selected_high_nonstationarity_realization.csv"
+  },
+  "selected_realization_nhpp_leyp_fit_summary.csv": {
+    "sha256": "48c948ab17b52fd8d36538f334615aeac0c00896295d551d5825024e0dd2799c",
+    "source": "outputs/tables/selected_realization_nhpp_leyp_fit_summary.csv"
+  },
+  "selected_realization_event_magnitude_distribution_comparison.csv": {
+    "sha256": "dd7925a6298a7110822a7fe525fa1d260b38779c8b7a5580549bbbb1bc6d38e0",
+    "source": "outputs/tables/selected_realization_event_magnitude_distribution_comparison.csv"
+  },
+  "return_period_levels.csv": {
+    "sha256": "196ec6da513fac31aaf8ff59b5020f046a43a1e0b58827596262250c0c1bb975",
+    "source": "outputs/tables/return_period_levels.csv"
+  },
+  "degradation_model_fits/normalized_resistance_paths_used.csv": {
+    "sha256": "9b42180fe012d0d9be26f2496c1314ff65e3f9cbc7b3a24ff412f2b53e6a3e5b",
+    "source": "outputs/tables/degradation_model_fits/normalized_resistance_paths_used.csv"
+  },
+  "degradation_power_law_fits/power_gamma_process_fitted_parameters.csv": {
+    "sha256": "94d68bee60de40a93e425a59c1a69d0e27478c69519bbe1ffdd7d05d74529f7d",
+    "source": "outputs/tables/degradation_power_law_fits/power_gamma_process_fitted_parameters.csv"
+  },
+  "degradation_power_law_fits/power_gamma_process_initiation_distribution_fits.csv": {
+    "sha256": "3afef9999ee907e98e5328367ab5abe64713262c4ccbb5407c19ac95f23b3eb5",
+    "source": "outputs/tables/degradation_power_law_fits/power_gamma_process_initiation_distribution_fits.csv"
+  },
+  "degradation_power_law_fits/power_gamma_process_path_initiation_times.csv": {
+    "sha256": "898272f4238ece3fae14d924d3e989937a75f649e5553d0d48c1a6e09157e1a4",
+    "source": "outputs/tables/degradation_power_law_fits/power_gamma_process_path_initiation_times.csv"
+  },
+  "degradation_power_law_fits/power_law_mean_degradation_fit_comparison.csv": {
+    "sha256": "bdf486d9b134a3cecf977d57feb218595bada88ebd5bf43a2afc9b858c68a02d",
+    "source": "outputs/tables/degradation_power_law_fits/power_law_mean_degradation_fit_comparison.csv"
+  },
+  "degradation_power_law_fits/power_law_model_parameter_summary.csv": {
+    "sha256": "39e4132cab716de66912e36605590cf2471f5e60779e386d8e21e1f9eafd27a8",
+    "source": "outputs/tables/degradation_power_law_fits/power_law_model_parameter_summary.csv"
+  },
+  "degradation_power_law_fits/power_random_rate_common_propagation_parameters.csv": {
+    "sha256": "6093f2d44a5e98f2936ee2d9e616e71546a7ed73b29f593e2bddbc52abe88d99",
+    "source": "outputs/tables/degradation_power_law_fits/power_random_rate_common_propagation_parameters.csv"
+  },
+  "degradation_power_law_fits/power_random_rate_distribution_fits.csv": {
+    "sha256": "8d2ae389df5689821efe615b5a019d58414830a42284885382cedccd606127fd",
+    "source": "outputs/tables/degradation_power_law_fits/power_random_rate_distribution_fits.csv"
+  },
+  "degradation_power_law_fits/power_random_rate_fitted_parameters.csv": {
+    "sha256": "e412203764bc891865e994de2073199ab3d6cbef4f9d767e84a494fa31744b5c",
+    "source": "outputs/tables/degradation_power_law_fits/power_random_rate_fitted_parameters.csv"
+  },
+  "nonstationary_reliability_power_law/annual_reliability_results.csv": {
+    "sha256": "714941b0aa6d1a4625672c2bdb523afae50fec57800818b01aa8bed8c0ce26be",
+    "source": "outputs/tables/nonstationary_reliability_power_law/annual_reliability_results.csv"
+  },
+  "nonstationary_reliability_power_law/simulation_input_summary.csv": {
+    "sha256": "7ef3db757bf8dd6d8d7ceed23187286f53b9c73255e39ce788b3da2547f259f8",
+    "source": "outputs/tables/nonstationary_reliability_power_law/simulation_input_summary.csv"
+  },
+  "nonstationary_reliability_power_law/service_life_reliability_summary.csv": {
+    "sha256": "b04c84e216502d3638b0d5d12adf21632ff0e58fab97b29bb1f4931f0adbc64f",
+    "source": "outputs/tables/nonstationary_reliability_power_law/service_life_reliability_summary.csv"
+  }
+}

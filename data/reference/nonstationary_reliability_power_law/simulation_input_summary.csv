@@ -1,0 +1,5 @@
+degradation_model,scenario,sampler,cap_count,mean_t_ini,mean_eta,mean_m,c,nu,eta_gamma,m_gamma
+power_random_rate,Base temperature,bootstrap_tini_pooled_eta_common_m,0,43.184442292098794,0.049873220506969886,0.6250506130390658,,,,
+power_gamma_process,Base temperature,gamma_process_increments,0,43.17687362958096,,,103.23162896055268,0.0004610120470706138,0.047591024589538455,0.6894926986310181
+power_random_rate,SSP5 delta_T=4 C,bootstrap_tini_pooled_eta_common_m,0,37.58261125931896,0.049899248814855954,0.6250506130390658,,,,
+power_gamma_process,SSP5 delta_T=4 C,gamma_process_increments,0,37.43348188374906,,,103.23162896055268,0.0004610120470706138,0.047591024589538455,0.6894926986310181

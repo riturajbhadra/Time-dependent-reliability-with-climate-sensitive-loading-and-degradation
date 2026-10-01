@@ -1,0 +1,58 @@
+{
+  "paths": {
+    "input_csv": "data/raw/combined_output.csv",
+    "output_dir": "outputs"
+  },
+  "wind": {
+    "rho_air": 1.2,
+    "c_g": 2.0,
+    "c_e": 1.2,
+    "c_h": 2.0
+  },
+  "analysis": {
+    "future_start_year": 2025,
+    "threshold_wind_speed": 11.0,
+    "time_horizon_years": 75,
+    "time_step_years": 1,
+    "cover_mm": 70.0
+  },
+  "corrosion": {
+    "c_surf_mean": [
+      1.8,
+      3.5,
+      5.3,
+      7.4
+    ],
+    "c_surf_cov": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "t_end": 1000,
+    "dt": 1
+  },
+  "degradation": {
+    "t_life": 200,
+    "dt": 1,
+    "i_th_base": [
+      0.5,
+      2.0,
+      5.0,
+      10.0
+    ],
+    "alpha_mean": 5.65,
+    "alpha_cov": 0.22
+  },
+  "resistance": {
+    "initial_mean": 1621.0,
+    "initial_cov": 0.09
+  },
+  "dead_load": {
+    "mean": 359.0,
+    "cov": 0.1
+  },
+  "runtime": {
+    "random_seed": 42
+  }
+}
