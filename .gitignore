@@ -1,0 +1,16 @@
+.venv/
+.figure_dependencies/
+.local_backups/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+*.log
+outputs/
+!outputs/.gitkeep
