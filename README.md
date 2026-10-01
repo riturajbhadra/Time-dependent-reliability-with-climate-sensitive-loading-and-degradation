@@ -1,121 +1,124 @@
-# Climate-sensitive infrastructure reliability
+# Time-dependent reliability with climate-sensitive loading and degradation
 
-Research code for **Reliability Analysis of Infrastructure Systems under
-Climate-Induced Loading and Deterioration**. The retained analysis combines
-nonstationary wind-event loading with shifted power-law random-rate and
-gamma-process deterioration models. Resistance paths are simulated; the NHPP
-load process enters the reliability calculation analytically.
+Code and data accompanying **Reliability Analysis of Infrastructure Systems
+under Climate-Induced Loading and Deterioration**.
 
-The primary entry point is `main.py`. It uses the archived calibration inputs
-in `data/reference/` and reproduces the current 100,000-path reliability run.
-It does not refit parameters or overwrite those reference inputs.
+The analysis combines nonstationary environmental loading with time-dependent
+structural resistance. Two stochastic deterioration models are implemented:
+a shifted power-law random-rate model and a shifted gamma process. Reliability
+is evaluated using simulated resistance trajectories and an analytical
+non-homogeneous Poisson load-event formulation.
+
+The supplied example considers wind loading and corrosion-related deterioration.
+Baseline and prescribed warming temperature histories are used in the
+deterioration analysis. The repository includes calibration inputs, fitted
+parameters, reference results, and scripts for model estimation and reliability
+assessment.
 
 ## Installation
 
-Python 3.13 is the tested interpreter. Create an environment in a fresh checkout:
+Run all commands from the repository root. Python 3.13 was used for validation.
 
 ```sh
 python -m venv .venv
 ```
 
-Activate it with `.venv\Scripts\Activate.ps1` on Windows PowerShell, or
-`source .venv/bin/activate` on Linux/macOS. Then install:
+Activate the environment on **Windows PowerShell**:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+On **Linux or macOS**:
+
+```sh
+source .venv/bin/activate
+```
+
+Install the package and dependencies:
 
 ```sh
 python -m pip install -e . -c requirements-reproducible.txt
 ```
 
-The constraints file records the versions used for validation. `pyproject.toml`
-lists the required libraries; no external application or hosted service is
-needed to run the analysis.
+The constraints file specifies the dependency versions used for validation.
 
-## Reproduce the reliability results
+## Run the reliability analysis
 
 ```sh
 python main.py --validate-reference
 ```
 
-This runs both degradation models in both temperature cases, using 100,000
-paths per model/case and seed 20260526, and checks all resulting curves against
-the stored results. Outputs go to `outputs/reproduction/`:
+This command uses the supplied calibration tables to evaluate both degradation
+models under baseline and warming conditions. The default simulation uses
+100,000 trajectories per model and case, with random seed `20260526`.
+The validation option compares the computed results with the reference curves.
 
-- `annual_reliability_results.csv`: annual and cumulative failure probabilities,
-  reliability indices, and mean resistance.
-- `service_life_summary.csv`: first annual-index crossing of the selected target.
-- `final_horizon_summary.csv`: cumulative results at the end of the analysis.
-- `run_metadata.json`: sample size, seed, configuration, package versions, input
-  hashes, and reference-comparison results.
-- Four reliability plots and a simulation summary.
+Results are written to `outputs/reproduction/`:
 
-For a quick execution check rather than a publication calculation:
+| Output | Contents |
+|---|---|
+| `annual_reliability_results.csv` | Annual and cumulative failure probabilities, reliability indices, and mean resistance |
+| `service_life_summary.csv` | First crossing of the adopted annual reliability-index target |
+| `final_horizon_summary.csv` | Reliability results at the end of the analysis period |
+| `simulation_summary.csv` | Simulation input summary |
+| `run_metadata.json` | Configuration, sample size, seed, software versions, input hashes, and validation results |
+| PNG figures | Annual and cumulative probability-of-failure and reliability-index curves |
+
+For a short execution check:
 
 ```sh
 python main.py --n-sim 1000 --output-dir outputs/smoke
 ```
 
-Use `--target-beta 3.75` to change the service-life criterion. The default is
-3.0. Use `--config`, `--input-dir`, and `--output-dir` for alternate inputs.
-Changing the sample size, seed, or calibrated inputs is incompatible with an
-exact reproduction of the archived run. Simulation size, reliability seed and
-target reliability index are explicit command-line options.
+The default service-life target is an annual reliability index of `3.0`.
+Use `--target-beta` to specify another target. Additional options include
+`--n-sim`, `--seed`, `--config`, `--input-dir`, and `--output-dir`.
+Reference validation uses the default simulation settings and supplied inputs.
 
-## Convergence and verification
+## Model estimation and input generation
+
+Scripts are provided for wind-event extraction, occurrence and magnitude model
+fitting, mechanistic resistance-history generation, and stochastic degradation
+model estimation. The reliability entry point uses the supplied fitted tables;
+these estimation steps can be run separately.
+
+See the [reproducibility guide](docs/REPRODUCIBILITY.md) for commands, input
+requirements, and output locations. The [model documentation](docs/MODELS.md)
+describes the equations, assumptions, and implementation details, and the
+[data documentation](data/README.md) describes the input datasets and scenario
+definitions.
+
+## Verification and convergence
+
+Run the numerical and input-integrity checks:
 
 ```sh
 python -m unittest discover -s tests -v
+```
+
+Run the representative-case Monte Carlo convergence study:
+
+```sh
 python scripts/check_reliability_convergence.py
 ```
 
-The convergence study uses ten seeds, sample sizes from 1,000 to 100,000, and
-an independent 500,000-path reference. It checks the vectorized sampler against
-the primary implementation before computing annual/cumulative statistics and
-service-life variability. See [validation](docs/VALIDATION.md).
+The study compares sample sizes from 1,000 to 100,000 across ten random seeds
+against an independent 500,000-trajectory reference. It evaluates variability
+in reliability estimates and reliability-based service life. The procedure
+and results are described in [validation](docs/VALIDATION.md).
 
-## Refit or regenerate inputs
+## Repository structure
 
-These are separate research steps, not prerequisites for reproducing the stored
-reliability curves. Re-estimation can change fitted parameters and results.
-Commands and input/output relationships are in
-[reproducibility instructions](docs/REPRODUCIBILITY.md).
-
-| File | Purpose |
+| Path | Contents |
 |---|---|
-| `main.py`, `scripts/run_analysis.py` | Reproduce reliability from frozen fits |
-| `scripts/fit_power_law_degradation_reliability.py` | Fit both degradation models and run reliability |
-| `scripts/generate_degradation_paths.py` | Mechanistic initiation, corrosion, and normalized capacity histories |
-| `scripts/select_high_nonstationarity_realization.py` | Extract/rank wind realizations and threshold events |
-| `scripts/fit_selected_realization_nhpp_leyp.py` | Fit occurrence models and history-parameter profiles |
-| `scripts/fit_selected_event_magnitude_distributions.py` | Compare event-magnitude models |
-| `scripts/check_reliability_convergence.py` | Repeated-seed convergence study |
-| `scripts/generate_methodology_flowchart.py` | Editable methodology figure, PDF and PNG |
-| `src/wind_reliability/` | Configuration, sampling, and mechanistic pitting model |
-| `data/reference/` | Immutable calibration and regression-reference tables |
-| `tests/` | Input integrity and mathematical consistency checks |
+| `main.py` | Reliability-analysis entry point |
+| `scripts/` | Data processing, model fitting, reliability analysis, convergence, and figure generation |
+| `src/wind_reliability/` | Configuration, random sampling, and mechanistic deterioration functions |
+| `config/` | Model and analysis settings |
+| `data/raw/` | Wind input data |
+| `data/reference/` | Calibration inputs, fitted parameters, and reference results |
+| `docs/` | Model, reproduction, and validation documentation |
+| `tests/` | Numerical consistency and data-integrity checks |
+| `outputs/` | Generated results, created when scripts run |
 
-## Interpretation and data provenance
-
-Read [model assumptions and limitations](docs/MODELS.md) and
-[data provenance](data/README.md) before interpreting the results. In particular,
-the internal label `SSP5 delta_T=4 C` denotes a prescribed warming proxy; it is
-not evidence that the wind data are from an SSP experiment. Earlier manuscript
-provenance identifies CanRCM4/CanESM2 under RCP8.5. The raw CSV does not contain
-original climate-model identifiers.
-
-The current analysis retains the calibrated mean initial resistance of 1621 Pa
-and COV 0.09. It does not silently replace this with an alternative nominal-load
-calibration. Several manuscript/code differences are documented in `docs/MODELS.md`.
-
-## Repository contents
-
-Generated results, environments, editor settings, caches and local backups are
-excluded by `.gitignore`. The reference tables are deliberately included so the
-reproduction workflow starts from a clean checkout. Build a source archive with:
-
-```sh
-python scripts/package_release.py
-```
-
-The archive contains the source, documentation, tests, configuration and data;
-it excludes local working directories and historical results. No repository is
-published automatically. A redistribution license and final manuscript citation
-have not been assigned in these files.
